@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         if (scanf("%64s", binaryStr) != 1)
         {
             printf("Failed to read binary string\n");
-            return 1;
+            return 2;
         }
     }
 
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     if (!isBinaryString(binaryStr))
     {
         printf("Error: Input is not a valid binary string (contains characters other than '0' and '1')\n");
-        return 1;
+        return 2;
     }
 
     int len = strlen(binaryStr);
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     if (len % 4 != 0)
     {
         printf("Error: Invalid bit size. The length of the binary string must be a multiple of 4.\n");
-        return 1;
+        return 2;
     }
 
     char answer[20]; // Answer buffer
