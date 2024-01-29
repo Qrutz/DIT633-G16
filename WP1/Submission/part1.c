@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 int main() {
-    int choice = 1;
+    int choice = 1; //variable to store user's choice
 
     //runs while choice is valid
     while (choice >= 1 && choice <= 5) {
