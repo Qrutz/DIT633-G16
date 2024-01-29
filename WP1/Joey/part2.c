@@ -48,18 +48,22 @@ int main(int argc, char *argv[]) {
         //performs caesar cipher encryption according to argument input
         for (int i = 0; plaintext[i] != '\0'; i++) {
             int temp = (int)plaintext[i];
+            //processing ascii values of capital letters
             if (temp >= 65 && temp <= 90) {
                 temp += rotation - 65;
                 temp %= 26;
                 printf("%d", temp + 65);
+            //processing ascii values of lowercase letters
             } else if (temp >= 97 && temp <= 122) {
                 temp += rotation - 97;
                 temp %= 26;
                 printf("%c", temp + 97);
+            //printing punctuation
             } else {
                 printf("%c", plaintext[i]);
             }
         }
+        //print newline
         printf("\n");
     }
 }
