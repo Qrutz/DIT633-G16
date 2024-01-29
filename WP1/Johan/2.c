@@ -1,29 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h> // so we can we atoi.
 
-int isUpperCase(char c)
+int getPositionInAlphabet(char c)
 {
     if (c >= 'A' && c <= 'Z')
     {
-        return 1;
-    }
-    else if (c >= 'a' && c <= 'z')
-    {
-        return 0;
-    }
-    else
-    {
-        return -1;
-    }
-}
-
-int getPositionInAlphabet(char c)
-{
-    if (isUpperCase(c) == 1)
-    {
         return c - 'A';
     }
-    else if (isUpperCase(c) == 0)
+    else if (c >= 'a' && c <= 'z')
     {
         return c - 'a';
     }
@@ -35,31 +19,24 @@ int getPositionInAlphabet(char c)
 
 char getLetterAfterShift(char c, int shift)
 {
-    int posalf = getPositionInAlphabet(c);
+    int positionInAlphabet = getPositionInAlphabet(c);
 
-    int newpos = (posalf + shift) % 26;
+    int newPosition = (positionInAlphabet + shift) % 26;
 
-    char newChar;
-
-    if (isUpperCase(c) == 1)
+    if (c >= 'A' && c <= 'Z')
     {
-        return 'A' + newpos;
+        return 'A' + newPosition;
     }
     else
     {
-        return 'a' + newpos;
+        return 'a' + newPosition;
     }
 }
 
 int main(int argc, char *argv[])
 {
-
-    // printf("%d", charsToShift);
-
     char str[100];             // Buffer for user input
     int shift = atoi(argv[1]); // convert to int
-
-    // printf("%s", 'A' + newpos);
 
     while (1)
     {
@@ -69,8 +46,8 @@ int main(int argc, char *argv[])
 
         for (int i = 0; str[i] != '\0'; i++)
         {
-            char shiftedChar = getLetterAfterShift(str[i], shift);
-            printf("%c", shiftedChar);
+            char shiftedCharacter = getLetterAfterShift(str[i], shift);
+            printf("%c", shiftedCharacter);
         }
 
         printf("\n");
