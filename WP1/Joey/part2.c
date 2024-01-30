@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
             if (temp >= 65 && temp <= 90) {
                 temp += rotation - 65;
                 temp %= 26;
-                printf("%d", temp + 65);
+                printf("%c", temp + 65);
             //processing ascii values of lowercase letters
             } else if (temp >= 97 && temp <= 122) {
                 temp += rotation - 97;
