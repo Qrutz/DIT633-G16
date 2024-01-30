@@ -7,15 +7,18 @@
 #include <stdlib.h> // so we can we atoi.
 #include <ctype.h>  // so we can use isdigit
 
+#define MAX_BYTES_8Bit 255    // max bytes for 8 bits
+#define MAX_BYTES_16Bit 65535 // max bytes for 16 bits
+
 int calculateBitsNeeded(unsigned int number)
 {
     // 8 bits needed for decimals in range [1-225]
-    if (number >= 1 && number <= 255)
+    if (number >= 1 && number <= MAX_BYTES_8Bit)
     {
         return 8;
     }
     // 16 bits needed for decimals in range [256-65535]
-    else if (number > 255 && number <= 65535)
+    else if (number > MAX_BYTES_8Bit && number <= MAX_BYTES_16Bit)
     {
         return 16;
     }
@@ -74,7 +77,7 @@ int main(int argc, char *argv[])
 
     binaryStr[index] = '\0'; // terminate string
 
-    printf("%s", binaryStr);
+    printf("%s\n", binaryStr);
 
     return 0;
 }

@@ -100,6 +100,6 @@ int main(int argc, char *argv[])
 
     answer[index] = '\0'; // terminate string
 
-    printf("%s", answer);
+    printf("%s\n", answer);
     return 0;
 }
