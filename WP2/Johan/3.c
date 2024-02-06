@@ -171,6 +171,7 @@ int main(void)
 
             break;
         case '3':
+        {
             // char buffer to store sort choice which is either by firstname OR lastname
             char sortChoice;
             printf("Search by firstname (f/F), lastname (l/L): ");
@@ -197,6 +198,7 @@ int main(void)
                 search_by_name(searchlname, 1); // 1 tells the function we want to search with lastname
             }
             break;
+        }
         case '4':
             printfile(); // call print file function
             break;

@@ -47,11 +47,10 @@ void turn(ROBOT *robot)
     robot->dir = (robot->dir + 1) % 4;
 }
 
-int main(char *argv[])
-
+int main(int argc, char *argv[])
 {
     // define robot
-    ROBOT robot;
+    ROBOT robot = {0, 0, N};
 
     // set default direction
     robot.dir = N;
