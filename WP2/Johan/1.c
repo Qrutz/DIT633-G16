@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// enum for possible directions
 enum DIRECTION
 {
     N,
@@ -8,6 +9,7 @@ enum DIRECTION
     W
 };
 
+// robot structure
 typedef struct
 {
     int xpos;
@@ -54,10 +56,10 @@ int main(char *argv[])
     // set default direction
     robot.dir = N;
 
-    // infinite loop untukl
+    // infinite loop until ctrl-z
     while (1)
     {
-        // string to store input, 100 max feels right
+        // string to store input, 100 max chars
         char inputString[100];
 
         printf("Enter string of moves you wanna make, m = mov, t = turn\n");
@@ -67,15 +69,17 @@ int main(char *argv[])
         // loop over each character in the string
         for (int i = 0; inputString[i] != '\0'; i++)
         {
-            char c = inputString[i];
+            char c = inputString[i]; // current char
 
+            // if user enters 'm' robot moves
             if (c == 'm')
             {
                 move(&robot);
             }
+            // if user enters 't' we turn the robot
             else if (c == 't')
             {
-                turn(&robot);
+                turn(&robot); //
             }
         }
 

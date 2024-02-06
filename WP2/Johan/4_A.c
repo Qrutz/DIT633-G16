@@ -7,9 +7,10 @@
 int main(int argc, char *argv[])
 {
 
+    // error handling
     if (argc != 6)
     {
-        printf("5 args sir");
+        printf("You need to enter atleast 5 arguments!\n");
         return 0;
     }
     unsigned int engine_on = atoi(argv[1]); // 1 bits MSB

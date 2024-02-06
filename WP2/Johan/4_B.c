@@ -46,16 +46,16 @@ int main(int argc, char *argv[])
         packedByte <<= 4;                      // shift 4 left to make room for new values
         packedByte |= hexDecToInt(argv[1][i]); // put each hexdecimal digit into packedbyte
                                                // ex: packedByte |= 1010 => 0000 0000 |= 1010 => 0000 1010
-                                               // then we just shift next iteration to do the same thing
+                                               // then we just shift, next iteration to do the same thing
     }
 
-    // Here we extract values corresoponding to the values
-    unsigned int engine_on = (packedByte >> 7) & 0x01; // Extract MSB (bit 7) by shifting right by 7 and bitwise AND'ing it
+    // Here we extract binary values from the packedBytes value with bitwise OR and bit shifting.
+    unsigned int engine_on = (packedByte >> 7) & 0x01; // Extract MSB (bit 8) by shifting right by 7 and bitwise AND'ing it
                                                        // so 1010 1010 becomes 0000 0001 & 0000 0001 == 1 is extracted.
-    unsigned int gear_pos = (packedByte >> 4) & 0x07;  // Extracts bit 6-4 using above method.
-    unsigned int key_pos = (packedByte >> 2) & 0x03;   // Extracts bit 3-2
-    unsigned int brake1 = (packedByte >> 1) & 0x01;    // Extracts bit 1
-    unsigned int brake2 = packedByte & 0x01;           // Extracts LSB (Bit 0) // no need to shift since we are already at lsb bit
+    unsigned int gear_pos = (packedByte >> 4) & 0x07;  // Extracts bit 7-5 using above method.
+    unsigned int key_pos = (packedByte >> 2) & 0x03;   // Extracts bit 4-3
+    unsigned int brake1 = (packedByte >> 1) & 0x01;    // Extracts bit 2
+    unsigned int brake2 = packedByte & 0x01;           // Extracts LSB (Bit 1) // no need to shift since we are already at lsb bit
 
     printf("Name            Value\n");
     printf("---------------------------------\n");
