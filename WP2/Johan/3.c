@@ -18,8 +18,9 @@ void append_file(PERSON *inrecord); // appends a new person to the file
 
 void search_by_name(char *name, int sortOption)
 {
-    FILE *file; // file pointer
-    PERSON t;   // temp person
+    FILE *file;    // file pointer
+    PERSON t;      // temp person
+    int found = 0; // flag for checking if atleast one record has been found
 
     if ((file = fopen("personDB.dat", "rb")) == NULL) // Open file and check if it actually exists
     {
@@ -27,7 +28,6 @@ void search_by_name(char *name, int sortOption)
         exit(1); // exit program if error occured
     }
 
-    int found = 0; // flag for checking if record has been found
     // Read each record from the file
     while (fread(&t, sizeof(PERSON), 1, file) == 1) //
     {
@@ -35,8 +35,7 @@ void search_by_name(char *name, int sortOption)
         if (strcmp((sortOption == 0 ? t.firstname : t.famname), name) == 0)
         {
             printf("\nFound match: Firstname: %s, Lastname: %s, persnumber: %s\n", t.firstname, t.famname, t.pers_number);
-            found = 1; // Set found flag to true.
-            break;     // break after first match
+            found = 1; // mark that we have found atleast one record
         }
     }
 

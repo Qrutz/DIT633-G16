@@ -73,16 +73,17 @@ int main(int argc, char *argv[])
             // if user enters 'm' robot moves
             if (c == 'm')
             {
-                move(&robot);
+                move(&robot); // call move function
             }
             // if user enters 't' we turn the robot
             else if (c == 't')
             {
-                turn(&robot); //
+                turn(&robot); // call turn function
             }
         }
 
         printf("Robot location after instructions are: x=%d y=%d\n", robot.xpos, robot.ypos);
     }
-    //
+
+    return 0;
 }

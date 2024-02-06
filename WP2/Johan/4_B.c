@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
     // loop over chars in input
     // ex: input 0xAB, packedbyte initial state is 0000 0000
     // so after first iteration with A, packedByte is 0000 1010
-    // next iteration we first off need to shift left by 4 to make room for new values, 1010 0000
-    // after b we have => 1010 1011
+    // next iteration we first need to shift left by 4 to make room for new values, 1010 0000
+    // after second iteration we have => 1010 1011
     for (int i = 0; i < strlen(argv[1]); i++)
     {
 
@@ -50,12 +50,14 @@ int main(int argc, char *argv[])
     }
 
     // Here we extract binary values from the packedBytes value with bitwise OR and bit shifting.
-    unsigned int engine_on = (packedByte >> 7) & 0x01; // Extract MSB (bit 8) by shifting right by 7 and bitwise AND'ing it
+    // We use bitwise AND to extract the value of the bit we want to extract
+    // so masking with 0x01 for values that are between 0-1, 0x07 for values between 0-7 etc.
+    unsigned int engine_on = (packedByte >> 7) & 0x01; // Extract MSB (bit 7) by shifting right by 7 and bitwise AND with 0000 0001
                                                        // so 1010 1010 becomes 0000 0001 & 0000 0001 == 1 is extracted.
-    unsigned int gear_pos = (packedByte >> 4) & 0x07;  // Extracts bit 7-5 using above method.
-    unsigned int key_pos = (packedByte >> 2) & 0x03;   // Extracts bit 4-3
-    unsigned int brake1 = (packedByte >> 1) & 0x01;    // Extracts bit 2
-    unsigned int brake2 = packedByte & 0x01;           // Extracts LSB (Bit 1) // no need to shift since we are already at lsb bit
+    unsigned int gear_pos = (packedByte >> 4) & 0x07;  // Extracts bit 7-5 using above method
+    unsigned int key_pos = (packedByte >> 2) & 0x03;   // Extracts bit 4-3, shifts right by 2 and masks with 0000 0011
+    unsigned int brake1 = (packedByte >> 1) & 0x01;    // Extracts bit 2, shifts right by 1.
+    unsigned int brake2 = packedByte & 0x01;           // Extracts LSB (Bit 1) // no need to shift since we are already at the lsb bit.
 
     printf("Name            Value\n");
     printf("---------------------------------\n");
