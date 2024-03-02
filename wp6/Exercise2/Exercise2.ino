@@ -32,12 +32,27 @@ void setup() {
 
 }
 
+void loop() {
+  // First detect the distance to object
+  distance = detectDistance();
+  // Use distance as input for lighting LEDs
+  lightLED(distancePtr);
+  // Small delay, adjust accordingly..
+  delay(250);
+
+}
+
 int detectDistance(){
 
+  // Write a zero to the output to clear the system
   digitalWrite(TRIGGER, LOW);
+  // Wait 2 microseconds
   delayMicroseconds(2);
+  // Write a one to the output to send a ping
   digitalWrite(TRIGGER, HIGH);
+  // Wait 10 microseconds
   delayMicroseconds(10);
+  // Write a zero to the output to stop sending the pin
   digitalWrite(TRIGGER, LOW);
  
   // Read the signal from the sensor: a HIGH pulse whose
@@ -57,10 +72,13 @@ int detectDistance(){
   return cm;
 }
 
+// Using PWM we can increase the brightness of the LED
+// Currently using this instead since we dont have a buzzer :(
 void fadeLED(int *brightness){
   analogWrite(REDLED5, *brightness);
 }
 
+// Take distance as input and lights up the LEDs based on the distance.
 void lightLED(int *distance){
   if(*distance < 200 && *distance >= 143){
     *brightnessPtr = 10;
@@ -79,7 +97,7 @@ void lightLED(int *distance){
     fadeLED(brightnessPtr);
   }
   else if(*distance < 87 && *distance > 30){
-    *brightnessPtr = 50;
+    *brightnessPtr = 70;
     digitalWrite(REDLED1, HIGH);
     digitalWrite(REDLED2, HIGH);
     digitalWrite(REDLED3, HIGH);
@@ -87,7 +105,7 @@ void lightLED(int *distance){
     fadeLED(brightnessPtr);
   }
   else if(*distance <= 30 && *distance >= 25){
-    *brightnessPtr = 70;
+    *brightnessPtr = 100;
     digitalWrite(REDLED1, HIGH);
     digitalWrite(REDLED2, HIGH);
     digitalWrite(REDLED3, HIGH);
@@ -106,7 +124,6 @@ void lightLED(int *distance){
     digitalWrite(REDLED2, LOW);
     digitalWrite(REDLED3, LOW);
     digitalWrite(REDLED4, LOW);
-    delay(250);
   }
   else{
     digitalWrite(REDLED1, LOW);
@@ -115,16 +132,5 @@ void lightLED(int *distance){
     digitalWrite(REDLED4, LOW);
     analogWrite(REDLED5, 0);
   }
-}
-
-void loop() {
-
-  distance = detectDistance();
-
-  lightLED(distancePtr);
-
-  delay(50);
-
-
 }
 
