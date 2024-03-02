@@ -16,6 +16,13 @@ int static *distancePtr = &distance;
 int static brightness;
 int *brightnessPtr = &brightness;
 
+const int DISTANCE_THRESHOLD_1 = 200;
+const int DISTANCE_THRESHOLD_2 = 143;
+const int DISTANCE_THRESHOLD_3 = 87;
+const int DISTANCE_THRESHOLD_4 = 30;
+const int DISTANCE_THRESHOLD_5 = 25;
+
+
 
 void setup() {
 
@@ -80,7 +87,7 @@ void fadeLED(int *brightness){
 
 // Take distance as input and lights up the LEDs based on the distance.
 void lightLED(int *distance){
-  if(*distance < 200 && *distance >= 143){
+  if(*distance < DISTANCE_THRESHOLD_1 && *distance >= DISTANCE_THRESHOLD_2){
     *brightnessPtr = 10;
     digitalWrite(REDLED1, HIGH);
     digitalWrite(REDLED2, LOW);
@@ -88,7 +95,7 @@ void lightLED(int *distance){
     digitalWrite(REDLED4, LOW);
     fadeLED(brightnessPtr);
   }
-  else if(*distance < 143 && *distance >= 87){
+  else if(*distance < DISTANCE_THRESHOLD_2 && *distance >= DISTANCE_THRESHOLD_3){
     *brightnessPtr = 30;
     digitalWrite(REDLED1, HIGH);
     digitalWrite(REDLED2, HIGH);
@@ -96,7 +103,7 @@ void lightLED(int *distance){
     digitalWrite(REDLED4, LOW);
     fadeLED(brightnessPtr);
   }
-  else if(*distance < 87 && *distance > 30){
+  else if(*distance < DISTANCE_THRESHOLD_3 && *distance >= DISTANCE_THRESHOLD_4){
     *brightnessPtr = 70;
     digitalWrite(REDLED1, HIGH);
     digitalWrite(REDLED2, HIGH);
@@ -104,7 +111,7 @@ void lightLED(int *distance){
     digitalWrite(REDLED4, LOW);
     fadeLED(brightnessPtr);
   }
-  else if(*distance <= 30 && *distance >= 25){
+  else if(*distance < DISTANCE_THRESHOLD_4 && *distance >= DISTANCE_THRESHOLD_5){
     *brightnessPtr = 100;
     digitalWrite(REDLED1, HIGH);
     digitalWrite(REDLED2, HIGH);
@@ -112,7 +119,7 @@ void lightLED(int *distance){
     digitalWrite(REDLED4, HIGH);
     fadeLED(brightnessPtr);
   }
-  else if(*distance < 25){
+  else if(*distance < DISTANCE_THRESHOLD_5){
     *brightnessPtr = 255;
     fadeLED(brightnessPtr);
     digitalWrite(REDLED1, HIGH);
